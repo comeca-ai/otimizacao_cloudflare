@@ -37,6 +37,12 @@ Mantidos de propósito: R2 `narracoes` (11 MB, do clone-voice removido), D1 `ind
 - Backup: código do Worker (1 MB) + export SQL do D1 (877 KB, 5 tabelas) → `limpeza-2026-10-26/planob-homologacao-2026-10-26.tgz`.
 - Removidos: Worker `planob-homologacao` (cron `* * * * *`, 21 020 invocações/30 d) e D1 `planob-homologacao` (`7fc766f2…`). Verificação: Workers 50 → 49, D1 20 → 19.
 
+### Limpeza 3 (autorização: "comunidade steve pode apagar, flow studio pode apagar")
+
+- Backup: código de `comunidade-steve` (3,3 MB), `flow-studio-homolog` (55 KB), `flow-studio-mcp-homolog` (1 KB) + export SQL do D1 `flow-studio-homolog` (10 KB, 10 tabelas) → `limpeza-2026-10-26/comunidade-steve-flow-studio-2026-10-26.tgz`.
+- Removidos: Workers `comunidade-steve`, `flow-studio-homolog`, `flow-studio-mcp-homolog`; D1 `flow-studio-homolog` (`de912b41…`); workflow `flow-studio-homolog`. Verificação: Workers 49 → 46, D1 19 → 18.
+- Mantidos: D1 `escola-homolog` e R2 `slidesaulas-homolog` (ainda usados por `escola-classica-homolog`).
+
 ### Remoções não executadas (bloqueadas pela política de permissões da sessão, não pela Cloudflare)
 
 Chamadas DELETE negadas pelo classificador; fazer no painel ou autorizar explicitamente:
