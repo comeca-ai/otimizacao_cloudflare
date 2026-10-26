@@ -11,11 +11,15 @@ Princípio: **manter só o que está funcionando**. Nada é removido sem registr
 | [docs/01-inventario.md](docs/01-inventario.md) | Tabela completa de tudo que existe na conta, classificado em **USADO / NÃO USADO / QUEBRADO**, com evidência (tráfego 30 dias, invocações, bindings, conexões) |
 | [docs/02-plano-de-acao.md](docs/02-plano-de-acao.md) | O que remover, o que corrigir e o que endurecer, em ordem de prioridade, com o impacto de cada item |
 | [docs/CHANGELOG.md](docs/CHANGELOG.md) | Registro cronológico de cada ação executada na conta |
-| [scripts/collect.sh](scripts/collect.sh) | Script somente leitura que gera o snapshot da conta via API (usado na auditoria) |
+| [scripts/collect.sh](scripts/collect.sh) | Script somente leitura que gera o snapshot da conta via API (usado na auditoria) | 
+| [scripts/backup-2026-10-26.sh](scripts/backup-2026-10-26.sh), [scripts/delete-2026-10-26.sh](scripts/delete-2026-10-26.sh) | Backup e remoção da limpeza de 26/10 (o delete em lote foi bloqueado; as remoções saíram como chamadas individuais equivalentes) |
+| Painel por serviço | https://claude.ai/artifact/7NJ6QqRveiLYj1ZXv3tks6 (privado) |
 
 ## Como foi feito
 
 1. Snapshot somente leitura da conta via API REST (`scripts/collect.sh`) e GraphQL Analytics (últimos 30 dias: requisições HTTP por zona, invocações por Worker, consultas por D1, armazenamento e operações por bucket R2).
+| [scripts/backup-2026-10-26.sh](scripts/backup-2026-10-26.sh), [scripts/delete-2026-10-26.sh](scripts/delete-2026-10-26.sh) | Backup e remoção da limpeza de 26/10 (o delete em lote foi bloqueado; as remoções saíram como chamadas individuais equivalentes) |
+| Painel por serviço | https://claude.ai/artifact/7NJ6QqRveiLYj1ZXv3tks6 (privado) |
 2. Cruzamento: cada recurso foi ligado a quem o usa (Worker ↔ D1/R2/KV/Queue/Durable Object, Zona ↔ Worker/Tunnel, Access ↔ host).
 3. Classificação por evidência de uso real, não por nome.
 
@@ -27,4 +31,6 @@ Período analisado: **26/09/2026 → 26/10/2026**. Snapshot bruto (JSON) fica fo
 export CF_TOKEN=<token somente leitura>
 export CF_ACCOUNT=749b2e9b3642e4b03321d5830e81c195
 OUT=/caminho/fora/do/repo bash scripts/collect.sh
+| [scripts/backup-2026-10-26.sh](scripts/backup-2026-10-26.sh), [scripts/delete-2026-10-26.sh](scripts/delete-2026-10-26.sh) | Backup e remoção da limpeza de 26/10 (o delete em lote foi bloqueado; as remoções saíram como chamadas individuais equivalentes) |
+| Painel por serviço | https://claude.ai/artifact/7NJ6QqRveiLYj1ZXv3tks6 (privado) |
 ```

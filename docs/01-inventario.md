@@ -1,6 +1,10 @@
 # Inventário: o que é usado e o que não é
 
-Período: 26/09/2026 → 26/10/2026 (30 dias). Fonte: API REST + GraphQL Analytics, somente leitura.
+Período: 26/09/2026 → 26/10/2026 (30 dias). Fonte: API REST + GraphQL Analytics.
+
+> **Atualização 26/10/2026, após a limpeza.** Os itens abaixo marcados ❌ e listados em `CHANGELOG.md` → "Limpeza executada" **já foram removidos** (6 Workers, 5 KV, 5 R2, 8 Access apps, 1 container). Os totais da seção "Resumo" e as tabelas refletem o estado **antes** da limpeza. Visão atual por serviço: painel publicado na sessão (link no PR).
+>
+> Recursos que não constavam na primeira versão deste inventário: **Containers** (4 apps, ver CHANGELOG), **Durable Objects** (8 namespaces, o de `ultravis-server` ativo 24/7), **Workflows** (10, um órfão), **Workers AI** (5,9 k chamadas/30 d em `reembolsonew`).
 
 Legenda: ✅ **USADO** (mantém) · ⚠️ **REVISAR** (funciona, mas tem problema ou é ambiente não-prod) · ❌ **NÃO USADO** (candidato a remover) · 🔴 **QUEBRADO** (aponta para algo que não existe)
 
