@@ -2,7 +2,7 @@
 
 Período: 26/09/2026 → 26/10/2026 (30 dias). Fonte: API REST + GraphQL Analytics.
 
-> **Atualização 26/10/2026, após a limpeza.** Os itens abaixo marcados ❌ e listados em `CHANGELOG.md` → "Limpeza executada" **já foram removidos** (6 Workers, 5 KV, 5 R2, 8 Access apps, 1 container). Os totais da seção "Resumo" e as tabelas refletem o estado **antes** da limpeza. Visão atual por serviço: painel publicado na sessão (link no PR).
+> **Atualização 26/10/2026, após as limpezas 1–3.** Já removidos (ver `CHANGELOG.md`): 10 Workers (`clone-voice`, `crawler1`, `sebraepocjhon`, `sebracompliance`, `ultravis-claude-worker`, `ultravis-d1-espelho`, `planob-homologacao`, `comunidade-steve`, `flow-studio-homolog`, `flow-studio-mcp-homolog`), 2 D1 (`planob-homologacao`, `flow-studio-homolog`), 5 KV, 5 R2, 8 Access apps, 1 container, 1 workflow. Conta agora: **46 Workers, 18 D1, 1 KV, 18 R2 (1 é o bucket de backup), 7 Access apps, 3 containers, 9 workflows**. Os totais da seção "Resumo" e as tabelas refletem o estado **antes** da limpeza. Visão atual por serviço: painel publicado na sessão (link no PR).
 >
 > Recursos que não constavam na primeira versão deste inventário: **Containers** (4 apps, ver CHANGELOG), **Durable Objects** (8 namespaces, o de `ultravis-server` ativo 24/7), **Workflows** (10, um órfão), **Workers AI** (5,9 k chamadas/30 d em `reembolsonew`).
 

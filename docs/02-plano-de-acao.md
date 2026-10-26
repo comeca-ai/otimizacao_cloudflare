@@ -6,7 +6,7 @@
 |---|---|---|---|---|
 | **Paraibão** | paraibao.com.br | ✅ saudável (tunnel, Access, 213 k req) | Decidir destino de `crawler` e `projetoparaibao` (0 inv, redeployados 21/10) | — |
 | **Reembolsa** | oreembolsobot.app, reembolsa.ia.br, anotasemvolta.com.br | ⚠️ 3 ambientes não-prod (dev/homolog/poc) ligados, 2 containers Paddle 4×6 GiB | Escolher 1 ambiente ativo; desligar cron e containers dos outros; lifecycle em `reembolsa-backups`; limpar DNS cPanel; apagar tunnel `reembolsa-relatorios` (bloqueado) | containers Paddle (memória provisionada), 12 filas, 6 workflows |
-| **Comunidade / Escolas** | comeca.ai | ✅ produção ok; ⚠️ homolog com carga alta; 🔴 2 CNAMEs para tunnel apagado | Apagar `materiais`/`tagarelo` ou recriar tunnel; revisar cron */15 em homolog; proxy nos A DNS-only; DMARC p=none → quarantine | D1 `escola` 1,1 M consultas/30 d; Stream 54 vídeos |
+| **Comunidade / Escolas** | comeca.ai | ✅ produção ok; ⚠️ homolog com carga alta; 🔴 2 CNAMEs para tunnel apagado; 🗑️ `comunidade-steve` removido 26/10 | Apagar `materiais`/`tagarelo` ou recriar tunnel; desligar cron */15 em homolog; proxy nos A DNS-only; DMARC p=none → quarantine | D1 `escola` 1,1 M consultas/30 d; Stream 54 vídeos |
 | **Ultravis** | ultravis.ai, ultravis.dev | ✅ ativo; ⚠️ container 4 GiB ligado 100 % do tempo | Confirmar se o container precisa ficar sempre ligado (sleep após inatividade?); apagar Pages `ultravis-claude` e tunnel `ultravis-k4` | **maior custo variável da conta**: ~10,6 M GiB-s/30 d + DO 24/7 |
 | **Radar / Índice CNPJ** | indice.ia.br | ✅ ativo; ⚠️ D1 "poc" com 3,4 GB e 1,9 M escritas/mês | Plano para `radar-poc` (índice/particionamento/histórico em R2); decidir `indicie` (100 % erro), `gptchat-cnpj`, D1 `cnpj-chat-db` órfão | D1 68 % do free; R2 `cnpjs` 17,8 GB |
 | **Máquina de Ativos** | tinhaprint.com.br | ✅ ativo, 410 erros/30 d | Investigar erros; decidir `maquinaativos-teste` | — |
@@ -15,7 +15,9 @@
 | **Motor n Work** | workers.dev | ✅ ativo | Decidir `motornwork-gateway` (20 inv, criado 14/10) | — |
 | **Kilo** | kilo.ia.br | ✅ ativo (tunnel bonanca) | Nada | — |
 | **Sites em origem própria** | meusprompts, virada, consultorsebrae, farolqueprotege, blinda, ajeita, pagabao, alcada | ⚠️ cache ~2 %; 4 zonas quase sem pageviews; 🔴 olhodetandera sem DNS | Cache Rules + Tiered Cache; confirmar se blinda/ajeita/pagabao/alcada ainda existem na origem; resolver olhodetandera | origem recebe quase todo o tráfego |
-| **Plano B (homolog)** | workers.dev | ⚠️ cron a cada minuto | Reduzir para */5 ou */15 | 43 k inv/mês só de cron |
+| **Plano B (homolog)** | — | 🗑️ removido em 26/10 (Worker + D1, backup em R2) | — | — |
+| **Flow Studio (homolog)** | — | 🗑️ removido em 26/10 (2 Workers + D1 + workflow, backup em R2) | — | — |
+| **Ambientes não-prod** | vários | ⚠️ ver `03-ambientes-nao-prod.md` | Apagar Reembolsa homolog; desligar cron de escola-homolog e maquinaativos-teste | container 4×6 GiB ocioso; 2 M linhas D1/dia |
 | **Faz a Conta** | fazaconta.ia.br | ❌ 5 Workers, 0 inv em 44 dias, zona nunca ligada | Publicar ou apagar | — |
 | **Utilitários / MCPs** | workers.dev | ✅ baixo uso legítimo | Decidir `anonimizador3` (duplicata), `apartamento-recife-mcp` (novo) | — |
 | **Sebrae / Compliance** | — | 🗑️ removido hoje | — | — |
