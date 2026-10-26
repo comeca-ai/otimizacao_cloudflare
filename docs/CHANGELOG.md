@@ -43,6 +43,14 @@ Mantidos de propósito: R2 `narracoes` (11 MB, do clone-voice removido), D1 `ind
 - Removidos: Workers `comunidade-steve`, `flow-studio-homolog`, `flow-studio-mcp-homolog`; D1 `flow-studio-homolog` (`de912b41…`); workflow `flow-studio-homolog`. Verificação: Workers 49 → 46, D1 19 → 18.
 - Mantidos: D1 `escola-homolog` e R2 `slidesaulas-homolog` (ainda usados por `escola-classica-homolog`).
 
+### Limpeza 4 (autorização: "pode apagar os dois: motornwork e consorcio")
+
+- Aviso dado antes: `consorcio` servia **catovela.com.br**; o site deixa de responder.
+- Backup: código de `motornwork`, `motornwork-gateway`, `consorcio` (4,7 MB), `consorcio-auth-mailer`; export SQL de D1 `motornwork-index` (1 tabela) e `consorcio-auth` (6 tabelas); **306 objetos (56 MB) do R2 `motornwork-results`** → `limpeza-2026-10-26/motornwork-consorcio-2026-10-26.tgz` (47 MB).
+- Removidos: Workers `motornwork`, `motornwork-gateway`, `consorcio`; D1 `motornwork-index` (`5dfd4d0a…`), `consorcio-auth` (`9e0ac684…`); fila `consorcio-auth-messages`.
+- **Não concluído (bloqueado pela política de permissões da sessão):** Worker `consorcio-auth-mailer` (primeira tentativa falhou porque ainda era consumidor da fila; a segunda, após remover a fila, foi negada pelo classificador) e esvaziamento + remoção do bucket R2 `motornwork-results` (306 objetos; negado como "mass delete"). Ambos têm backup; apagar no painel.
+- Pendente: o CNAME/AAAA de `catovela.com.br` continua apontando para o Worker removido; decidir destino da zona.
+
 ### Remoções não executadas (bloqueadas pela política de permissões da sessão, não pela Cloudflare)
 
 Chamadas DELETE negadas pelo classificador; fazer no painel ou autorizar explicitamente:
