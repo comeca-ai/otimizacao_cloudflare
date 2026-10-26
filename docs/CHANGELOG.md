@@ -32,6 +32,11 @@ Critério: 0 uso em 30 dias **e** criado antes de 26/09 **e** nenhum recurso ati
 
 Mantidos de propósito: R2 `narracoes` (11 MB, do clone-voice removido), D1 `indicie-auth`/`cnpj-chat-db` (aguardam decisão sobre `indicie`).
 
+### Limpeza 2 (autorização: "plano b homologação vamos apagar")
+
+- Backup: código do Worker (1 MB) + export SQL do D1 (877 KB, 5 tabelas) → `limpeza-2026-10-26/planob-homologacao-2026-10-26.tgz`.
+- Removidos: Worker `planob-homologacao` (cron `* * * * *`, 21 020 invocações/30 d) e D1 `planob-homologacao` (`7fc766f2…`). Verificação: Workers 50 → 49, D1 20 → 19.
+
 ### Remoções não executadas (bloqueadas pela política de permissões da sessão, não pela Cloudflare)
 
 Chamadas DELETE negadas pelo classificador; fazer no painel ou autorizar explicitamente:

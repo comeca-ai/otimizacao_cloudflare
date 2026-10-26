@@ -130,6 +130,29 @@ Verificar no painel o bucket `us_aulas` (155 MB) que aparece no analytics mas n�
 
 ---
 
+## O que impede voltar ao plano gratuito (medido em 26/10/2026, janela de 30 d)
+
+Limites do Workers Free e dos produtos conforme documentação conhecida; os valores da conta são do GraphQL Analytics. Conferir os limites na tabela oficial antes de decidir.
+
+| Dimensão | Conta hoje | Free | Veredito | Quem causa |
+|---|---|---|---|---|
+| **Containers** | 3 apps (ultravis 1×4 GiB 24/7; Paddle dev/homolog 4×6 GiB) | não existe no Free | 🔴 bloqueia sozinho | Ultravis, Reembolsa |
+| **Queues** | 13 filas em uso | não existe no Free | 🔴 bloqueia sozinho | Reembolsa (12), Consórcio (1) |
+| **D1 linhas lidas/dia** | 10,1 M | 5 M | 🔴 2× acima | `radar-poc` (6,5 M/dia), `escola` (1,5 M/dia), `escola-homolog` (2 M/dia) |
+| **D1 linhas escritas/dia** | 1,59 M | 100 k | 🔴 16× acima | `radar-poc` (1,5 M/dia), `escola` (43 k/dia) |
+| **CPU por invocação** | p99 de 297 ms (gptchat-radar), 293 ms (consorcio), 50–80 ms (escolas) | 10 ms | 🔴 vários Workers estourariam | Radar, Consórcio, Escolas, reembolsa-documentos-dev, maquinaativos |
+| **R2 armazenamento** | 19,2 GB | 10 GB | ⚠️ cobra o excedente, mas R2 é separado do plano Workers (~US$ 0,14/mês) | `cnpjs` 17,8 GB |
+| **Stream** | 54 vídeos (761 min), 385 min vistos | não tem Free | ⚠️ cobrado sempre | Escolas |
+| Workers requests/dia | 5,2 k | 100 k | ✅ folga | — |
+| D1 armazenamento | 3,2 GB | 5 GB | ✅ por enquanto | `radar-poc` cresce |
+| Durable Objects (SQLite) | 11,4 k GB-s/dia | 13 k GB-s/dia | ✅ no limite | ultravis-server 24/7 |
+| Workers AI | ~12 neurons/dia | 10 k/dia | ✅ | — |
+| KV, Workflows, Browser Rendering, Email, Zero Trust | baixo | Free cobre | ✅ | — |
+
+**Conclusão:** o Workers Paid (US$ 5/mês) é obrigatório enquanto existirem **Containers** ou **Queues**. Mesmo sem eles, D1 (leituras e escritas) e CPU dos Workers de Radar, Consórcio e Escolas estão acima do Free. Voltar ao gratuito exigiria: tirar Reembolsa e Ultravis de Containers/Queues, reduzir drasticamente as consultas do `radar-poc` (índice por CNPJ já identificado em 08/10) e cortar o CPU dos Workers pesados. R2 e Stream são cobrados à parte, em qualquer plano.
+
+O que **não** está cobrando nada além do US$ 5: Workers requests, KV, Workflows, DO, Workers AI, Access, Tunnels, DNS e as 31 zonas.
+
 ## Fase 4 — Custo e eficiência 💰
 
 Hoje a conta custa ~US$ 5 (Workers Paid) + Stream (~US$ 4 por 12,7 h armazenadas) + R2 (centavos). O risco não é a fatura atual, mas as **cotas**:
