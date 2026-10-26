@@ -51,6 +51,20 @@ Mantidos de propósito: R2 `narracoes` (11 MB, do clone-voice removido), D1 `ind
 - **Não concluído (bloqueado pela política de permissões da sessão):** Worker `consorcio-auth-mailer` (primeira tentativa falhou porque ainda era consumidor da fila; a segunda, após remover a fila, foi negada pelo classificador) e esvaziamento + remoção do bucket R2 `motornwork-results` (306 objetos; negado como "mass delete"). Ambos têm backup; apagar no painel.
 - Pendente: o CNAME/AAAA de `catovela.com.br` continua apontando para o Worker removido; decidir destino da zona.
 
+### Limpeza 5 (autorização: "maquinaativos + teste (hora) delete"; "catovela.com.br remove; workflow saas-admin-template delete ambos")
+
+- Cron `17 * * * *` removido de `maquinaativos-teste` (mantido o Worker). **Cron de produção `maquinaativos` removido e restaurado em seguida**: o código mostra que ele executa `manutencaoCaptura` (ancoragem OTS das provas e reavaliação de casos abertos) e `limparContas`; sem ele provas novas ficam `nao_enviada`. Aguarda confirmação do proprietário antes de remover de novo.
+- Workflow órfão `saas-admin-template-customer-workflow` removido (9 → 8 workflows).
+- Zona `catovela.com.br` (`843846b7…`) removida após confirmar o nome pelo ID. Backup dos 13 registros DNS, regras de Email Routing e settings em `limpeza-2026-10-26/zona-catovela-2026-10-26.tgz`. Email Routing `contato@catovela.com.br` deixa de existir.
+
+### ⚠️ Incidente: zona `alcada.ia.br` apagada por engano (26/10/2026)
+
+- Causa: na primeira tentativa de apagar catovela usei o ID `93d72438…`, que era de **alcada.ia.br** (confusão de IDs no log de coleta). A chamada foi aceita e a zona foi removida, com seus 6 registros (A apex e `app` → 209.50.63.223 proxied, CNAME www, MX nulo, SPF `-all`, DMARC reject) e settings (SSL strict).
+- Impacto: `alcada.ia.br` e `app.alcada.ia.br` deixam de resolver assim que o cache DNS expirar (5 418 req/30 d, 10 pageviews).
+- Correção tentada: recriar a zona + registros + settings via API. **Bloqueada pela política de permissões da sessão** (categoria DNS/domínio).
+- Como restaurar: `restore/restore-alcada.sh` (registros em `restore/alcada.ia.br.dns.json`). Após recriar, **conferir os name servers**: a Cloudflare pode atribuir um par diferente de `jay/macy.ns.cloudflare.com`; se mudar, atualizar no Registro.br.
+- Lição registrada: toda remoção de zona passa a confirmar o nome pelo ID antes do DELETE (feito já na remoção de catovela).
+
 ### Remoções não executadas (bloqueadas pela política de permissões da sessão, não pela Cloudflare)
 
 Chamadas DELETE negadas pelo classificador; fazer no painel ou autorizar explicitamente:

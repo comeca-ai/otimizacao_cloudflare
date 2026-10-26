@@ -1,0 +1,50 @@
+[
+  {
+    "type": "A",
+    "name": "alcada.ia.br",
+    "content": "209.50.63.223",
+    "proxied": true,
+    "ttl": 1,
+    "priority": null
+  },
+  {
+    "type": "A",
+    "name": "app.alcada.ia.br",
+    "content": "209.50.63.223",
+    "proxied": true,
+    "ttl": 1,
+    "priority": null
+  },
+  {
+    "type": "CNAME",
+    "name": "www.alcada.ia.br",
+    "content": "alcada.ia.br",
+    "proxied": true,
+    "ttl": 1,
+    "priority": null
+  },
+  {
+    "type": "MX",
+    "name": "alcada.ia.br",
+    "content": ".",
+    "proxied": false,
+    "ttl": 1,
+    "priority": 0
+  },
+  {
+    "type": "TXT",
+    "name": "alcada.ia.br",
+    "content": "\"v=spf1 -all\"",
+    "proxied": false,
+    "ttl": 1,
+    "priority": null
+  },
+  {
+    "type": "TXT",
+    "name": "_dmarc.alcada.ia.br",
+    "content": "\"v=DMARC1; p=reject;\"",
+    "proxied": false,
+    "ttl": 1,
+    "priority": null
+  }
+]
